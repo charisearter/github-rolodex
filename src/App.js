@@ -9,9 +9,10 @@ class App extends Component {
 		};
 	}
 	render() {
+		const { name } = this.state;
 		return (
 			<div className='App'>
-				<h1>Hello, {this.state.name}</h1>
+				<h1>Hello, {name}</h1>
 				<button onClick={() => this.setState({ name: 'Fox' })}>
 					Click to change Name
 				</button>
