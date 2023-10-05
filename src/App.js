@@ -5,17 +5,31 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			name: 'Reese',
+			users: [],
 		};
 	}
+
+	componentDidMount() {
+		fetch('https://api.github.com/users')
+			.then((response) => response.json())
+			.then((usersData) => {
+				this.setState(
+					() => {
+						return { users: usersData };
+					},
+					() => {
+						console.log(this.state);
+					}
+				);
+			});
+	}
 	render() {
-		const { name } = this.state;
+		const { users } = this.state;
 		return (
 			<div className='App'>
-				<h1>Hello, {name}</h1>
-				<button onClick={() => this.setState({ name: 'Fox' })}>
-					Click to change Name
-				</button>
+				{users.map((user) => (
+					<h1 key={user.id}>{user.login}</h1>
+				))}
 			</div>
 		);
 	}
