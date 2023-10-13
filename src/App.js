@@ -6,6 +6,7 @@ class App extends Component {
 		super();
 		this.state = {
 			users: [],
+			searchInput: '',
 		};
 	}
 
@@ -32,7 +33,15 @@ class App extends Component {
 					type='text'
 					placeholder='Search for GitHub User'
 					onChange={(e) => {
+						console.log(e.target.value);
 						// filter thru users and get what you want
+						const filteredUsers = users.filter((user) => {
+							return user.login.includes(e.target.value);
+						});
+
+						this.setState(() => {
+							return { users: filteredUsers };
+						});
 					}}
 				/>
 				{users.map((user) => (
